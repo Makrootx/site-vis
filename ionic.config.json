@@ -1,0 +1,7 @@
+{
+  "name": "siteVis",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
