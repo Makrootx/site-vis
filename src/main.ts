@@ -36,6 +36,12 @@ import "./theme/variables.css";
 
 import { JeepSqlite } from "jeep-sqlite/dist/components/jeep-sqlite";
 import { DBSERVICE, DbService } from "./providers/database-service";
+
+import { defineCustomElements } from "@ionic/pwa-elements/loader";
+import { SiteService } from "./providers/site-service";
+
+defineCustomElements(window);
+
 customElements.define("jeep-sqlite", JeepSqlite);
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -46,6 +52,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     const app = createApp(App).use(IonicVue).use(router);
 
     app.provide([DBSERVICE], dbService);
+
+    const carService = new SiteService(dbService.value as DbService);
+    await carService.createTableIfNotExist();
+
     router.isReady().then(() => {
       app.mount("#app");
     });

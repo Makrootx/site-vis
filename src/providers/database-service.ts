@@ -26,12 +26,12 @@ export class DbService {
 
   async connect() {
     const ret = await this.sqlite.checkConnectionsConsistency();
-    const isConn = (await this.sqlite.isConnection("db_vite", false)).result;
+    const isConn = (await this.sqlite.isConnection("db_vite2", false)).result;
     if (ret.result && isConn) {
-      this.db = await this.sqlite.retrieveConnection("db_vite", false);
+      this.db = await this.sqlite.retrieveConnection("db_vite2", false);
     } else {
       this.db = await this.sqlite.createConnection(
-        "db_vite",
+        "db_vite2",
         false,
         "no-encryption",
         1,
@@ -42,7 +42,7 @@ export class DbService {
   }
 
   async close() {
-    await this.sqlite.closeConnection("db_vite", false);
+    await this.sqlite.closeConnection("db_vite2", false);
   }
 }
 
